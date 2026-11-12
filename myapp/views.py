@@ -16,7 +16,10 @@ class MainPage(ListView):
     model = ArtWork
     template_name = 'myapp/artwork_list.html'
     context_object_name = 'artworks'
-    ordering = ['date_created']
+    def get_queryset(self):
+        return ArtWork.objects.filter(
+            is_best=True
+        ).order_by('-date_created')
 
 
 def contact_ajax_view(request):
