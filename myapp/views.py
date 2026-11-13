@@ -22,6 +22,28 @@ class MainPage(ListView):
         ).order_by('-date_created')
 
 
+class AllArtworks(ListView):
+    model = ArtWork
+    template_name = 'myapp/all_artworks.html'
+    context_object_name = 'artworks'
+
+    def get_queryset(self):
+        return ArtWork.objects.all().order_by('-date_created')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['artworks_2d'] = self.object_list.filter(
+            artwork_type='2d'
+        )
+
+        context['artworks_3d'] = self.object_list.filter(
+            artwork_type='3d'
+        )
+
+        return context
+
+
 def contact_ajax_view(request):
     if request.method == 'POST':
         try:

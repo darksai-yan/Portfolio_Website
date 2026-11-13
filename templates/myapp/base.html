@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portfolio — Yan Ivaskiv</title>
+
+    <meta name="description"
+          content="Creative portfolio showcasing design, motion and digital projects.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+
+    <header>
+        <nav class="container">
+            <!-- Логотип веде нагору головної сторінки -->
+            <a href="{% url 'myapp:main_page' %}#home" class="logo">YAN<span>.</span>IVASKIV</a>
+
+            <ul class="nav-links">
+                <li><a href="{% url 'myapp:main_page' %}#home">Home</a></li>
+                <li><a href="{% url 'myapp:main_page' %}#projects">Projects</a></li>
+                <li><a href="{% url 'myapp:main_page' %}#about">About</a></li>
+                <!-- Кнопка відкриття модалки залишається без змін -->
+                <li><a href="#" onclick="openContact(); return false;" class="nav-contact">Let's talk ↗</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    {% block content %}
+    
+    {% endblock %}
+    <script>
+    // 1. Автоматичне оновлення року у футері
+    const yearEl = document.getElementById("year");
+    if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+    }
+
+    // 2. Анімація появи елементів (.reveal) на всіх сторінках
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.12 }
+    );
+
+    document.querySelectorAll(".reveal").forEach((element) => {
+        observer.observe(element);
+    });
+</script>
+</body>
+</html>

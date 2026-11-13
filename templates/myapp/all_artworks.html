@@ -1,0 +1,152 @@
+
+
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block title %}All Artworks{% endblock %}
+
+{% block content %}
+
+<section class="projects container" id="all-artworks">
+
+    
+
+
+    <!-- 2D ARTWORKS -->
+
+    <div class="section-heading reveal">
+        <div>
+            <p class="section-label">Two-dimensional</p>
+            <h2>2D Artworks.</h2>
+        </div>
+    </div>
+
+    <div class="project-grid">
+
+        {% for artwork in artworks_2d %}
+
+        <article class="project-card reveal">
+
+            <div class="project-image">
+
+                {% if artwork.media_type == 'video' and artwork.video_url %}
+
+                    {% if artwork.youtube_embed_url %}
+                        <iframe
+                            src="{{ artwork.youtube_embed_url }}"
+                            title="{{ artwork.title }}"
+                            width="100%"
+                            height="100%"
+                            style="aspect-ratio: 16 / 9; border: 0;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    {% else %}
+                        <p style="padding: 20px; color: var(--muted);">Invalid YouTube URL</p>
+                    {% endif %}
+
+                {% elif artwork.photos %}
+
+                    <img
+                        src="{{ artwork.photos.url }}"
+                        alt="{{ artwork.title }}"
+                        loading="lazy"
+                    >
+
+                {% endif %}
+
+            </div>
+
+            <div class="project-info">
+                <div>
+                    <h3>{{ artwork.title }}</h3>
+                    <p>{{ artwork.description|truncatewords:15 }}</p>
+                </div>
+
+                <span class="project-year">
+                    {{ artwork.date_created|date:"Y" }}
+                </span>
+            </div>
+
+        </article>
+
+        {% empty %}
+
+            <p style="color: var(--muted);">No 2D artworks available yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- 3D ARTWORKS -->
+    
+    <div class="section-heading reveal" style="margin-top: 60px;">
+        <div>
+            <p class="section-label">Three-dimensional</p>
+            <h2>3D Artworks.</h2>
+        </div>
+    </div>
+
+    <div class="project-grid">
+
+        {% for artwork in artworks_3d %}
+
+        <article class="project-card reveal">
+
+            <div class="project-image">
+
+                {% if artwork.media_type == 'video' and artwork.video_url %}
+
+                    {% if artwork.youtube_embed_url %}
+                        <iframe
+                            src="{{ artwork.youtube_embed_url }}"
+                            title="{{ artwork.title }}"
+                            width="100%"
+                            height="100%"
+                            style="aspect-ratio: 16 / 9; border: 0;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    {% else %}
+                        <p style="padding: 20px; color: var(--muted);">Invalid YouTube URL</p>
+                    {% endif %}
+
+                {% elif artwork.photos %}
+
+                    <img
+                        src="{{ artwork.photos.url }}"
+                        alt="{{ artwork.title }}"
+                        loading="lazy"
+                    >
+
+                {% endif %}
+
+            </div>
+
+            <div class="project-info">
+                <div>
+                    <h3>{{ artwork.title }}</h3>
+                    <p>{{ artwork.description|truncatewords:15 }}</p>
+                </div>
+
+                <span class="project-year">
+                    {{ artwork.date_created|date:"Y" }}
+                </span>
+            </div>
+
+        </article>
+
+        {% empty %}
+
+            <p style="color: var(--muted);">No 3D artworks available yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
