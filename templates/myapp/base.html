@@ -9,6 +9,21 @@
 
     <meta name="description"
           content="Creative portfolio showcasing design, motion and digital projects.">
+          
+    <!-- Open Graph / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Portfolio — Yan Ivaskiv">
+    <meta property="og:description" content="Explore my design portfolio featuring creative, 2D, 3D and digital projects.">
+    <meta property="og:url" content="https://darksai217.pythonanywhere.com/">
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/portfolio-preview.png' %}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Portfolio — Yan Ivaskiv">
+    <meta name="twitter:description" content="Explore my design portfolio featuring creative, 2D, 3D and digital projects.">
+    <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/portfolio-preview.png' %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
